@@ -10,5 +10,7 @@ filterpy==1.4.5
 scikit-image==0.19.3
 scikit-learn
 openpyxl==3.0.9
+influxdb
+influxdb-client
 
 
