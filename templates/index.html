@@ -5,8 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSV File Upload</title>
     <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
         h1, h2 {
             text-align: center;
+            color: #f8f9fa;
         }
 
         form {
@@ -31,12 +40,26 @@
 
         img {
             display: block;
-            margin: 0 auto;
+            margin: 20px auto;
+            border: 1px solid #f8f9fa;
         }
 
         table {
             margin: 20px auto;
             width: 80%;
+            border-collapse: collapse;
+            background-color: #212529;
+            color: white;
+        }
+
+        table th, table td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #343a40;
         }
 
         a.btn {
@@ -49,6 +72,10 @@
             text-decoration: none;
             border-radius: 5px;
         }
+
+        a.btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -57,30 +84,23 @@
         <button type="submit">Fetch Data and Generate Plot</button>
     </form>
 
-    <!-- Display error message if provided by Flask -->
     {% if error %}
         <p class="error">{{ error }}</p>
     {% endif %}
 
-    <!-- Display the combined distribution graph -->
     {% if graph %}
-        <h2>Distribution of Global_active_power
- and Prediction</h2>
-        <img src="data:image/png;base64,{{ graph }}" alt="Global_active_power
- and Prediction">
+        <h2>Distribution of Global Active Power and Prediction</h2>
+        <img src="data:image/png;base64,{{ graph }}" alt="Chilled Water Rate (L/sec) and Prediction">
     {% endif %}
 
-    <!-- Display the data table for the dataset -->
     {% if data_table %}
         <h2>Data Table</h2>
-        {{ data_table | safe }}  <!-- Use safe filter to render HTML content -->
+        {{ data_table | safe }}
     {% endif %}
 
-    <!-- Display the Excel file download link -->
     {% if excel_file %}
         <h2>Download Predicted Data</h2>
-        <a href="/download_excel?excel_file={{ excel_file }}" class="btn btn-primary">Download Excel File</a>
+        <a href="/download_excel?excel_file={{ excel_file }}" class="btn">Download Excel File</a>
     {% endif %}
-
 </body>
 </html>
